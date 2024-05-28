@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { DatePicker } from "@/components/DatePicker";
 import { EventForm } from "@/components/EventForm";
 import { EventList } from "@/components/EventList";
@@ -8,6 +8,7 @@ import { Event, EventFormData } from "@/types";
 import { generateRecurringDates } from "@/helpers/";
 
 export default function Home() {
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const [events, setEvents] = useState<Event[]>([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -20,8 +21,17 @@ export default function Home() {
     fetchMoonEvents();
   }, []);
 
+  const openDialog = () => {
+    dialogRef.current?.showModal();
+  };
+
+  const closeDialog = () => {
+    dialogRef.current?.close();
+  };
+
   const handleAddEvent = (newEvent: EventFormData) => {
     setEvents([...events, { ...newEvent, id: Date.now() }]);
+    closeDialog();
   };
 
   const handleDeleteEvent = (id: number) => {
@@ -45,7 +55,13 @@ export default function Home() {
     <main>
       <h1>Event planner</h1>
       <DatePicker onChange={setSelectedDate} />
-      <EventForm onAddEvent={handleAddEvent} />
+      <button onClick={openDialog}>Open Dialog</button>
+      <dialog
+        ref={dialogRef}
+        className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+      >
+        <EventForm onAddEvent={handleAddEvent} onClose={closeDialog} />
+      </dialog>
       <EventList events={recurringEvents} onDelete={handleDeleteEvent} />
     </main>
   );
