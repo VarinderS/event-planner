@@ -1,19 +1,23 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DatePicker } from "@/components/DatePicker";
-import { EventForm, EventFormData } from "@/components/EventForm";
+import { EventForm } from "@/components/EventForm";
 import { EventList } from "@/components/EventList";
-
-export interface Event {
-  id: number;
-  title: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-}
+import { getMoonEvents } from "@/services/moonApi";
+import { Event, EventFormData } from "@/types";
 
 export default function Home() {
   const [events, setEvents] = useState<Event[]>([]);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  useEffect(() => {
+    const fetchMoonEvents = async () => {
+      const moonEvents = await getMoonEvents();
+      setEvents((currentEvents) => [...currentEvents, ...moonEvents]);
+    };
+
+    fetchMoonEvents();
+  }, []);
 
   const handleAddEvent = (newEvent: EventFormData) => {
     setEvents([...events, { ...newEvent, id: Date.now() }]);
@@ -26,7 +30,7 @@ export default function Home() {
   return (
     <main>
       <h1>Event planner</h1>
-      <DatePicker onChange={(date) => console.log(date)} />
+      <DatePicker onChange={setSelectedDate} />
       <EventForm onAddEvent={handleAddEvent} />
       <EventList events={events} onDelete={handleDeleteEvent} />
     </main>

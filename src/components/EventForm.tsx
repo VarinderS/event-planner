@@ -1,14 +1,8 @@
 import { useState } from "react";
+import { EventFormData } from "@/types";
 
 interface EventFormProps {
   onAddEvent: (event: EventFormData) => void;
-}
-
-export interface EventFormData {
-  title: string;
-  description: string;
-  startDate: string;
-  endDate: string;
 }
 
 const EventForm: React.FC<EventFormProps> = ({ onAddEvent }) => {
