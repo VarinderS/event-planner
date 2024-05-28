@@ -1,6 +1,27 @@
 import { Event } from "@/types";
 
-const phases = ["🌚", "🌓", "🌕", "🌗"];
+const phaseInfo = [
+  {
+    title: "Moon phase: New moon",
+    icon: "🌚",
+    description: "New moon phase",
+  },
+  {
+    title: "Moon phase: New moon",
+    icon: "🌓",
+    description: "First quarter moon phase",
+  },
+  {
+    title: "Moon phase: Full moon",
+    icon: "🌕",
+    description: "Full moon phase",
+  },
+  {
+    title: "Moon phase: Last quarter",
+    icon: "🌗",
+    description: "Last quarter moon phase",
+  },
+];
 
 const getMoonEvents = async (): Promise<Event[]> => {
   const year = new Date().getFullYear();
@@ -12,11 +33,12 @@ const getMoonEvents = async (): Promise<Event[]> => {
     const data = await response.json();
 
     return data.map((item: any) => {
-      const phase = phases[item.Phase];
+      const phaseData = phaseInfo[item.Phase];
       return {
         id: Date.now() + Math.random(),
-        title: "Moon Phase",
-        description: phase,
+        icon: phaseData.icon,
+        title: phaseData.title,
+        description: phaseData.description,
         startDate: item.Date,
         endDate: item.Date,
       };

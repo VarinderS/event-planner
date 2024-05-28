@@ -5,6 +5,7 @@ export interface Event {
   startDate: string;
   endDate: string;
   recurrence?: string;
+  icon?: string;
 }
 
 export interface EventFormData {
