@@ -12,4 +12,5 @@ export interface EventFormData {
   description: string;
   startDate: string;
   endDate: string;
+  recurrence?: string;
 }

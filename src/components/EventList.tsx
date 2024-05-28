@@ -16,8 +16,8 @@ interface EventListProps {
 const EventList: React.FC<EventListProps> = ({ events, onDelete }) => {
   return (
     <ul style={{ listStyleType: "none", padding: 0 }}>
-      {events.map((event) => (
-        <li key={event.id} style={{ margin: "10px 0" }}>
+      {events.map((event, index) => (
+        <li key={event.id + index} style={{ margin: "10px 0" }}>
           <h4>{event.title}</h4>
           <p>{event.description}</p>
           <p>

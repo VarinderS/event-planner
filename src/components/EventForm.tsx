@@ -11,16 +11,25 @@ const EventForm: React.FC<EventFormProps> = ({ onAddEvent }) => {
     description: "",
     startDate: "",
     endDate: "",
+    recurrence: "none",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setEvent({ ...event, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onAddEvent(event);
-    setEvent({ title: "", description: "", startDate: "", endDate: "" });
+    setEvent({
+      title: "",
+      description: "",
+      startDate: "",
+      endDate: "",
+      recurrence: "none",
+    });
   };
 
   return (
@@ -65,6 +74,17 @@ const EventForm: React.FC<EventFormProps> = ({ onAddEvent }) => {
             onChange={handleChange}
           />
         </label>
+        <select
+          name="recurrence"
+          value={event.recurrence}
+          onChange={handleChange}
+        >
+          <option value="none">None</option>
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+          <option value="annually">Annually</option>
+        </select>
         <button type="submit">Add Event</button>
       </form>
     </div>
