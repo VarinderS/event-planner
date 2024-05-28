@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { EventFormData } from "@/types";
+import classNames from "classnames";
 
 interface EventFormProps {
   onAddEvent: (event: EventFormData) => void;
@@ -42,48 +43,137 @@ const EventForm: React.FC<EventFormProps> = ({ onAddEvent, onClose }) => {
         >
           Add an event
         </h2>
-        <div className="flex flex-col">
-          <input
-            name="title"
-            value={event.title}
-            onChange={handleChange}
-            placeholder="Title"
-          />
-          <input
-            name="description"
-            value={event.description}
-            onChange={handleChange}
-            placeholder="Description"
-          />
-          <label>
-            <span>Start Date:</span>
-            <input
-              name="startDate"
-              type="datetime-local"
-              value={event.startDate}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            <span>End Date:</span>
-            <input
-              name="endDate"
-              type="datetime-local"
-              value={event.endDate}
-              onChange={handleChange}
-            />
-          </label>
-          <select
-            name="recurrence"
-            value={event.recurrence}
-            onChange={handleChange}
-          >
-            <option value="none">None</option>
-            <option value="daily">Daily</option>
-            <option value="weekly">Weekly</option>
-            <option value="monthly">Monthly</option>
-            <option value="annually">Annually</option>
-          </select>
+        <div className="flex flex-col gap-y-2">
+          <div>
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Title
+            </label>
+            <div className="mt-2">
+              <input
+                name="title"
+                id="title"
+                className={classNames(
+                  "block w-full rounded-md border-0 py-1.5 px-3",
+                  "text-gray-900",
+                  "shadow-sm ring-1 ring-inset ring-gray-300",
+                  "placeholder:text-gray-400",
+                  "focus:ring-2 focus:ring-inset focus:ring-indigo-600",
+                  "sm:text-sm sm:leading-6"
+                )}
+                placeholder="Event title"
+                value={event.title}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Description
+            </label>
+            <div className="mt-2">
+              <input
+                name="description"
+                id="description"
+                className={classNames(
+                  "block w-full rounded-md border-0 py-1.5 px-3",
+                  "text-gray-900",
+                  "shadow-sm ring-1 ring-inset ring-gray-300",
+                  "placeholder:text-gray-400",
+                  "focus:ring-2 focus:ring-inset focus:ring-indigo-600",
+                  "sm:text-sm sm:leading-6"
+                )}
+                placeholder="Event description"
+                value={event.description}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="startDate"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Start Date:
+            </label>
+            <div className="mt-2">
+              <input
+                name="startDate"
+                id="startDate"
+                className={classNames(
+                  "block w-full rounded-md border-0 py-1.5 px-3",
+                  "text-gray-900",
+                  "shadow-sm ring-1 ring-inset ring-gray-300",
+                  "placeholder:text-gray-400",
+                  "focus:ring-2 focus:ring-inset focus:ring-indigo-600",
+                  "sm:text-sm sm:leading-6"
+                )}
+                type="datetime-local"
+                value={event.startDate}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="endDate"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              End Date:
+            </label>
+            <div className="mt-2">
+              <input
+                name="endDate"
+                id="endDate"
+                className={classNames(
+                  "block w-full rounded-md border-0 py-1.5 px-3",
+                  "text-gray-900",
+                  "shadow-sm ring-1 ring-inset ring-gray-300",
+                  "placeholder:text-gray-400",
+                  "focus:ring-2 focus:ring-inset focus:ring-indigo-600",
+                  "sm:text-sm sm:leading-6"
+                )}
+                type="datetime-local"
+                value={event.endDate}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="recurrence"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Recurrence:
+            </label>
+            <div className="mt-2">
+              <select
+                id="recurrence"
+                name="recurrence"
+                className={classNames(
+                  "block w-full rounded-md border-0 py-1.5 px-3",
+                  "text-gray-900",
+                  "shadow-sm ring-1 ring-inset ring-gray-300",
+                  "placeholder:text-gray-400",
+                  "focus:ring-2 focus:ring-inset focus:ring-indigo-600",
+                  "sm:text-sm sm:leading-6"
+                )}
+                value={event.recurrence}
+                onChange={handleChange}
+              >
+                <option value="none">None</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="annually">Annually</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
       <div className="bg-gray-50 p-4 sm:flex sm:px-6 sm:gap-3">

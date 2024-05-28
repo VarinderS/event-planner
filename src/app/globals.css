@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+input:focus-visible {
+  outline: none;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
