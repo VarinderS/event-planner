@@ -52,17 +52,34 @@ export default function Home() {
     });
 
   return (
-    <main>
-      <h1>Event planner</h1>
-      <DatePicker onChange={setSelectedDate} />
-      <button onClick={openDialog}>Open Dialog</button>
-      <dialog
-        ref={dialogRef}
-        className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
-      >
-        <EventForm onAddEvent={handleAddEvent} onClose={closeDialog} />
-      </dialog>
-      <EventList events={recurringEvents} onDelete={handleDeleteEvent} />
-    </main>
+    <div className="bg-gray-200">
+      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="mx-auto max-w-3xl py-20">
+          <div className="md:flex md:items-center md:justify-between">
+            <div className="min-w-0 flex-1">
+              <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                Events
+              </h2>
+            </div>
+            <div className="mt-4 flex gap-4 md:ml-4 md:mt-0">
+              <DatePicker onChange={setSelectedDate} />
+              <button
+                onClick={openDialog}
+                className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:w-auto"
+              >
+                Add Event
+              </button>
+            </div>
+          </div>
+          <dialog
+            ref={dialogRef}
+            className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+          >
+            <EventForm onAddEvent={handleAddEvent} onClose={closeDialog} />
+          </dialog>
+          <EventList events={recurringEvents} onDelete={handleDeleteEvent} />
+        </div>
+      </main>
+    </div>
   );
 }
