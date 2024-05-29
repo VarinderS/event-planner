@@ -66,6 +66,7 @@ const EventForm: React.FC<EventFormProps> = ({ onAddEvent, onClose }) => {
                 placeholder="Event title"
                 value={event.title}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -116,6 +117,7 @@ const EventForm: React.FC<EventFormProps> = ({ onAddEvent, onClose }) => {
                 type="datetime-local"
                 value={event.startDate}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -141,6 +143,7 @@ const EventForm: React.FC<EventFormProps> = ({ onAddEvent, onClose }) => {
                 type="datetime-local"
                 value={event.endDate}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
